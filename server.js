@@ -12,6 +12,11 @@ app.use('/users', userRoutes);
 app.use('/products', productRoutes);
 app.use('/cart', cartRoutes);
 
+// Serve HTML view for products
+app.get('/api/products', (req, res) => {
+  res.sendFile(require('path').join(__dirname, 'VIEW', 'products.html'));
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
