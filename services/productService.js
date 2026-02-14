@@ -1,12 +1,21 @@
+// In-memory storage for products
+let products = [];
+
 exports.getAllProducts = () => {
-  return 'Fetching all products';
+  return products;
 };
 
 exports.addProduct = (productData) => {
-  // productData is available for future use
-  return 'Adding a new product';
+  // Add ID to the product
+  const product = {
+    id: products.length + 1,
+    ...productData,
+    createdAt: new Date()
+  };
+  products.push(product);
+  return product;
 };
 
 exports.getProductById = (id) => {
-  return `Fetching product with ID: ${id}`;
+  return products.find(p => p.id === parseInt(id));
 };

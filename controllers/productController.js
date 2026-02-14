@@ -6,7 +6,9 @@ exports.getAllProducts = (req, res) => {
 };
 
 exports.addProduct = (req, res) => {
+  console.log('Product data received from client:', req.body);
   const result = productService.addProduct(req.body);
+  console.log('Product added successfully:', result);
   res.send(result);
 };
 
