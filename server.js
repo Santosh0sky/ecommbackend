@@ -17,6 +17,10 @@ app.get('/api/products', (req, res) => {
   res.sendFile(require('path').join(__dirname, 'VIEW', 'products.html'));
 });
 
+// Error handling middleware
+const errorHandler = require('./middlewares/errorHandler');
+app.use(errorHandler);
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

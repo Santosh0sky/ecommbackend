@@ -1,9 +1,27 @@
-exports.getCartForUser = (req, res) => {
-  const { userId } = req.params;
-  res.send(`Fetching cart for user with ID: ${userId}`);
+const cartService = require('../services/cartService');
+
+exports.getCartForUser = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const result = cartService.getCartForUser(userId);
+    res.status(200).json({
+      status: 'success',
+      data: result
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
-exports.addProductToCart = (req, res) => {
-  const { userId } = req.params;
-  res.send(`Adding product to cart for user with ID: ${userId}`);
+exports.addProductToCart = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const result = cartService.addProductToCart(userId, req.body);
+    res.status(200).json({
+      status: 'success',
+      data: result
+    });
+  } catch (err) {
+    next(err);
+  }
 };

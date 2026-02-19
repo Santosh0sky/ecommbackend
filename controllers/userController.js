@@ -1,12 +1,38 @@
-exports.getAllUsers = (req, res) => {
-  res.send('Fetching all users');
+const userService = require('../services/userService');
+
+exports.getAllUsers = async (req, res, next) => {
+  try {
+    const result = userService.getAllUsers();
+    res.status(200).json({
+      status: 'success',
+      data: result
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
-exports.addUser = (req, res) => {
-  res.send('Adding a new user');
+exports.addUser = async (req, res, next) => {
+  try {
+    const result = userService.addUser(req.body);
+    res.status(201).json({
+      status: 'success',
+      data: result
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
-exports.getUserById = (req, res) => {
-  const { id } = req.params;
-  res.send(`Fetching user with ID: ${id}`);
+exports.getUserById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = userService.getUserById(id);
+    res.status(200).json({
+      status: 'success',
+      data: result
+    });
+  } catch (err) {
+    next(err);
+  }
 };
